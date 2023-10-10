@@ -128,7 +128,7 @@ namespace Lab2UnitTests
         public void RemoveVehicle_ShouldRemoveBySlotNumber()
         {
             // Arrange
-            VehicleTracker vehicleTracker = new VehicleTracker(10, "123 Fake st");
+            VehicleTracker vehicleTracker = new VehicleTracker(2, "123 Fake st");
             var vehicle1 = new Vehicle("A01 T22", true);
             vehicleTracker.AddVehicle(vehicle1);
 
@@ -137,8 +137,12 @@ namespace Lab2UnitTests
 
             // Assert
             CollectionAssert.AreEqual(
-                Enumerable.Range(1, 10).ToDictionary(i => i, _ => (Vehicle)null),
-                vehicleTracker.VehicleList);
+                               new Dictionary<int, Vehicle>
+                                {
+                                { 1, null },
+                                { 2, null }
+                                },
+                                vehicleTracker.VehicleList);
         }
 
         [TestMethod]
@@ -166,7 +170,7 @@ namespace Lab2UnitTests
         /* The VehicleTracker.ParkedPassholders() method should return a list of all parked vehicles that have a pass.
          */
         [TestMethod]
-        public void ParkedPassholders_ShouldReturnListOfPassholders()
+        public void ParkedPassholders_ReturnListOfParkedPassholdersWithPass()
         {
             // Arrange
             VehicleTracker vehicleTracker = new VehicleTracker(10, "123 Fake st");
